@@ -181,10 +181,13 @@ function HandsontableManualColumnMove() {
   };
 
   var updateHandlePosition = function (handle, target) {
-    var instance = this;
+    var col = this.view.wt.wtTable.getCoords(target.parentNode).col;
+    if (col >= 0) {
+      var instance = this;
 
-    handle.style.left = target.offsetLeft + 'px';
-    handle.style.top = Handsontable.Dom.getScrollTop(instance.rootElement[0]) + "px";
+      handle.style.left = target.offsetLeft + 'px';
+      handle.style.top = Handsontable.Dom.getScrollTop(instance.rootElement[0]) + "px";
+    }
   };
 
   this.modifyCol = function (col) {
