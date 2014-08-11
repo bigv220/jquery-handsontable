@@ -71,8 +71,8 @@ function HandsontableManualColumnMove() {
 
     instance.rootElement.on('mousedown.manualColumnMove', '.manualColumnMover', function (e) {
 
-      var mover = e.currentTarget,
-          TH = instance.view.THEAD.querySelectorAll('th')[currentCol];
+//      var mover = e.currentTarget,
+      var TH = instance.view.THEAD.querySelectorAll('th')[currentCol];
 
       startCol = Handsontable.Dom.index(TH) + instance.colOffset();
       endCol = startCol;
@@ -88,7 +88,7 @@ function HandsontableManualColumnMove() {
       ghostStyle.display = 'none';
     });
 
-    instance.rootElement.on('mouseenter.manualColumnMove', 'td, th', function (e) {
+    instance.rootElement.on('mouseenter.manualColumnMove', 'td, th', function () {
       var currentColId = Handsontable.Dom.index(this) + instance.colOffset();
           currentCol = currentColId;
 
@@ -182,7 +182,7 @@ function HandsontableManualColumnMove() {
 
   var updateHandlePosition = function (handle, target) {
     var col = this.view.wt.wtTable.getCoords(target.parentNode).col;
-    if (col >= 0) {
+    if (target.parentNode.nodeName == 'TH' && col >= 0) {
       var instance = this;
 
       handle.style.left = target.offsetLeft + 'px';
